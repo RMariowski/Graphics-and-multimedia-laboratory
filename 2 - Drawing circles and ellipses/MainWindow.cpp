@@ -39,34 +39,34 @@ void MainWindow::drawPixel(int x, int y, int r, int g, int b)
     _imgPixels[width * 4 * y + 4 * x + 2] = r;
 }
 
-void MainWindow::drawLine(int x1, int y1, int x2, int y2)
+void MainWindow::drawLine(int startX, int startY, int endX, int endY)
 {
-    double a = (y1 - static_cast<double>(y2)) / (x1 - static_cast<double>(x2));
-    double b = y1 - a * x1;
+    double a = (startY - static_cast<double>(endY)) / (startX - static_cast<double>(endX));
+    double b = startY - a * startX;
 
-    if (x1 > x2)
-        std::swap(x1, x2);
+    if (startX > endX)
+        std::swap(startX, endX);
 
-    if (y1 > y2)
-        std::swap(y1, y2);
+    if (startY > endY)
+        std::swap(startY, endY);
 
-    int x = x1;
-    int y = y1;
+    int x = startX;
+    int y = startY;
 
-    if (x1 == x2)
+    if (startX == endX)
     {
-        for (; y <= y2; y++)
-            drawPixel(x1, y, 0, 0, 0);
+        for (; y <= endY; y++)
+            drawPixel(startX, y, 0, 0, 0);
     }
     else
     {
-        for (; x <= x2; x++)
+        for (; x <= endX; x++)
         {
             int y = round(a * x + b);
             drawPixel(x, y, 0, 0, 0);
         }
 
-        for (; y <= y2; y++)
+        for (; y <= endX; y++)
         {
             int x = round((y - b) / a);
             drawPixel(x, y, 0, 0, 0);

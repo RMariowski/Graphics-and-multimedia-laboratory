@@ -23,7 +23,7 @@ public:
 private:
     void drawPixel(int x, int y, int r, int g, int b);
 
-    void drawLine(int x1, int y1, int endX, int endY);
+    void drawLine(int startX, int startY, int endX, int endY);
 
 private slots:
     void on_btnClear_clicked();
