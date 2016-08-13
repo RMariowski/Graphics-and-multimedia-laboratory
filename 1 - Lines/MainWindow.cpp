@@ -53,6 +53,11 @@ void MainWindow::drawLine(int startX, int startY, int endX, int endY)
         for (; y <= endY; y++)
             drawPixel(startX, y, 0, 0, 0);
     }
+    else if (startY == endY)
+    {
+        for (; x <= endX; x++)
+            drawPixel(x, startY);
+    }
     else
     {
         for (; x <= endX; x++)
@@ -61,7 +66,7 @@ void MainWindow::drawLine(int startX, int startY, int endX, int endY)
             drawPixel(x, y, 0, 0, 0);
         }
 
-        for (; y <= endX; y++)
+        for (; y <= endY; y++)
         {
             int x = round((y - b) / a);
             drawPixel(x, y, 0, 0, 0);

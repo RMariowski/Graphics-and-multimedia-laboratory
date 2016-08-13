@@ -29,7 +29,7 @@ public:
     ~MainWindow();
 
 private:
-    void drawPixel(int x, int y, int r, int g, int b);
+    void drawPixel(int x, int y, int r = 0, int g = 0, int b  = 0);
 
     void drawLine(int startX, int startY, int endX, int endY);
 

@@ -2,10 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QPainter>
-#include <QImage>
 #include <QMouseEvent>
-#include <QRect>
+
+#include "PixelPainter.h"
+#include "Marker.h"
 
 namespace Ui {
 class MainWindow;
@@ -21,14 +21,16 @@ public:
     ~MainWindow();
 
 private:
-    void drawPixel(int x, int y, int r = 0, int g = 0, int b = 0);
+    void addMarker(QPoint* point, int size);
 
-    void drawLine(int startX, int startY, int endX, int endY);
+    double getDistanceBetweenPoints(int x1, int y1, int x2, int y2);
 
 private slots:
     void on_btnClear_clicked();
 
     void mousePressEvent(QMouseEvent* event);
+
+    void mouseMoveEvent(QMouseEvent* event);
 
     void mouseReleaseEvent(QMouseEvent* event);
 
@@ -36,12 +38,12 @@ private slots:
 
 private:
     Ui::MainWindow* _ui;
+    Canvas* _canvas;
+    PixelPainter* _pixelPainter;
 
-    QImage* _img;
-    unsigned char* _imgPixels;
-    QRect _imgBounds;
-
-    QPoint _pressPos;
+    QList<QPoint> _clicks;
+    QList<Marker> _markers;
+    Marker* _selectedMarker;
 };
 
 #endif // MAINWINDOW_H
