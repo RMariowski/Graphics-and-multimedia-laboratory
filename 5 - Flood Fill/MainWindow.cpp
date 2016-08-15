@@ -2,6 +2,7 @@
 #include "ui_MainWindow.h"
 #include <cmath>
 #include <vector>
+#include <QStack>
 
 #define PI 3.14159265358979323846
 
@@ -139,6 +140,72 @@ void MainWindow::drawPolygon(int x, int y, double a, double b)
     update();
 }
 
+void MainWindow::floodFill(int x, int y, QColor oldColor, QColor newColor)
+{
+    QStack<QPoint> stack;
+
+    if (_img->pixelColor(QPoint(x, y)) != oldColor)
+        return;
+
+    stack.push(QPoint(x, y));
+
+    while (!stack.isEmpty())
+    {
+        QPoint p = stack.pop();
+        x = p.x();
+        y = p.y();
+
+        if (_img->pixelColor(QPoint(x, y)) == oldColor)
+        {
+            int w = p.x();
+            int e = p.x();
+
+            while (_img->pixelColor(QPoint(w, y)) == oldColor)
+            {
+                w--;
+                if (w < 0)
+                {
+                    w = 0;
+                    break;
+                }
+            }
+
+            while (_img->pixelColor(QPoint(e, y)) == oldColor)
+            {
+                e++;
+                if (e >= _imgBounds.width())
+                {
+                    e = _imgBounds.width() - 1;
+                    break;
+                }
+            }
+
+            for (int i = w + 1; i < e; i++)
+            {
+                drawPixel(i, y, newColor.red(), newColor.green(),
+                          newColor.blue());
+            }
+
+            for (int i = w + 1; i < e; i++)
+            {
+                if (y + 1 < _imgBounds.height() &&
+                    _img->pixelColor(QPoint(i, y + 1)) == oldColor)
+                {
+                    stack.push(QPoint(i, y + 1));
+                }
+
+                if (y -1 >= 0 &&
+                    _img->pixelColor(QPoint(i, y - 1)) == oldColor)
+                {
+                    stack.push(QPoint(i, y - 1));
+                }
+            }
+        }
+    }
+
+    update();
+}
+
 double MainWindow::getDistanceBetweenPoints(int x1, int y1, int x2, int y2)
 {
     return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
@@ -187,8 +254,8 @@ void MainWindow::mouseReleaseEvent(QMouseEvent* event)
     {
         case DRAW_MODE_LINE:
         {
-			if (x < _imgBounds.width() && y < _imgBounds.height())
-				drawLine(_pressPos.x(), _pressPos.y(), x, y);
+            if (x < _imgBounds.width() && y < _imgBounds.height())
+                drawLine(_pressPos.x(), _pressPos.y(), x, y);
         }
         break;
 
@@ -223,6 +290,14 @@ void MainWindow::mouseReleaseEvent(QMouseEvent* event)
             }
         }
         break;
+
+        case DRAW_MODE_FLOOD_FILL:
+        {
+            if (x < _imgBounds.width() && y < _imgBounds.height())
+                floodFill(x, y, _img->pixelColor(QPoint(x, y)),
+                          QColor(_ui->sldR->value(), _ui->sldG->value(), _ui->sldB->value()));
+        }
+        break;
     }
 }
 
@@ -244,4 +319,9 @@ void MainWindow::on_btnEllipse_clicked()
 void MainWindow::on_btnPolygon_clicked()
 {
     _drawMode = DRAW_MODE_POLYGON;
+}
+
+void MainWindow::on_btnFloodFill_clicked()
+{
+    _drawMode = DRAW_MODE_FLOOD_FILL;
 }
