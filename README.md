@@ -18,3 +18,6 @@ Write a program for drawing B-Spline curves of order 3 (homogeneous). Program sh
    
 ### 5 - Flood Fill    
 Write a program for filling polygons (and others figures) with specified color by using Flood Fill technique.
+   
+### 6 - Color Models   
+Write a program that represents two color models - RGB and HSV.
