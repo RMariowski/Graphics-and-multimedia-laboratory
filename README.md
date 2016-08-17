@@ -21,3 +21,9 @@ Write a program for filling polygons (and others figures) with specified color b
    
 ### 6 - Color Models   
 Write a program that represents two color models - RGB and HSV.
+   
+### 7 - Blend Modes   
+Write a program presenting at least 5 selected blending modes.
+    
+### 8 - Morphological Operations   
+Write a program presenting the action of the 4 basic morphological operations (erosion, dilation, opening, closing) on binary image.
