@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>cube/cube.obj</file>
+        <file>cube/cube.mtl</file>
+        <file>cube/cube.png</file>
+        <file>ironman/ironman.dff.png</file>
+        <file>ironman/Ironman.mtl</file>
+        <file>ironman/Ironman.obj</file>
+        <file>wooden_chair/Chair_Wood_D.png</file>
+        <file>wooden_chair/Wooden_Chair.mtl</file>
+        <file>wooden_chair/Wooden_Chair.obj</file>
+        <file>wooden_chair/Chair_Cloth_D.png</file>
+    </qresource>
+</RCC>

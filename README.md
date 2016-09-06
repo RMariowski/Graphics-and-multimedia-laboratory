@@ -27,3 +27,19 @@ Write a program presenting at least 5 selected blending modes.
     
 ### 8 - Morphological Operations   
 Write a program presenting the action of the 4 basic morphological operations (erosion, dilation, opening, closing) on binary image.
+   
+### 9 - 2D Transformations      
+Write a program that illustrates the basic geometric transformations (translation, rotation, scale, skew).
+   
+### 10 - Triangle Texturing
+Write a program that applies a texture to a triangle. Vertices of triangles need to be specified by mouse. 
+   
+### 11 - Morphing   
+Write a program that shows the effect of morphing.   
+   
+### 12 - 3D Solid   
+1) Write a program for drawing cube or other solid in perspective projection. Implement the transformation of the solid (translation, rotation, scale and shearing).   
+2) Add option to hide invisible faces.   
+3) Add option to shading faces of solid (at least one source of light).   
+   
+### 13 - Project
